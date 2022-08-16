@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>App Name: A coding Project By John Zhang</title>
+    <title>Rewind Name: A coding Project By John Zhang</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -75,15 +75,44 @@
 
     <main class="flex-shrink-0">
       <div class="container my-3 py-5 px-5">
-        <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+        <h2 class="border-1 border-bottom border-dark">Rewind</h2>
         <div class="row row-cols-1 row-cols-md-2">
             <div class="col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-javascript dark">
-                        //Call hello world
-                        function HelloWorld(){
-                        alert('hello world');
-                        }
+                      //Get the string from the page
+
+                      //Controller function
+                      function getValues(){
+                      
+                          document.getElementById("alert").classList.add("invisible");
+                          let userString = document.getElementById("userString").value;
+                          let revString = reverseString(userString);
+                          displayString(revString);
+                      }
+                      
+                      
+                      //Reverse the string
+                      //Logic functions
+                      function reverseString(uString){
+                          let revString = [];
+                          
+                          for(let index = uString.length-1; index>-1; index--){
+                              revString+=uString[index]
+                          }
+                          return revString
+                      }
+                      
+                      
+                      //Display the reversed string
+                      //View functions
+                      function displayString(revString){
+                          //Write to the page
+                          document.getElementById("msg").innerHTML = `Your string reversed is: ${revString}` 
+                          //Show the alert box
+                          document.getElementById("alert").classList.remove("invisible");
+                      
+                      }
                     </code>
                 </pre>
             </div>
