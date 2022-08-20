@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>Rewind Name: A coding Project By John Zhang</title>
+    <title>Enigma A coding Project By John Zhang</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -24,13 +24,13 @@
 
     <link rel="stylesheet" href="css/site.css" />
     <link rel="icon" type="image/png" href="img/favicon-32x32.png" />
-    <link rel="stylesheet" href="css/prism.css">
+    <link rel="stylesheet" href="css/prism.css" />
     <!-- Convert this to an external style sheet -->
   </head>
 
   <body class="d-flex flex-column h-100">
     <!-- Nav section -->
-   <nav class="navbar navbar-expand-md navbar-dark fixed-top"> 
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
           ><img
@@ -53,75 +53,187 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a
-              >
+              <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="app.html">The App</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
+              <a class="nav-link active" aria-current="page" href="code.html"
+                >The Code</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="#">Git Repo</a>
+              <a
+                class="nav-link"
+                target="_blank"
+                href="https://github.com/Ningyu-Zhang98/rewind"
+                >Git Repo</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="#">About</a>
+              <a
+                class="nav-link"
+                target="_blank"
+                href="https://johnzhang-portforlio.netlify.app/"
+                >About</a
+              >
             </li>
           </ul>
         </div>
       </div>
-    </nav> 
+    </nav>
 
     <main class="flex-shrink-0">
       <div class="container my-3 py-5 px-5">
-        <h2 class="border-1 border-bottom border-dark">Rewind</h2>
+        <h2 class="border-1 border-bottom border-dark">Code for: Enigma</h2>
         <div class="row row-cols-1 row-cols-md-2">
-            <div class="col-lg-8">
-                <pre class="line-numbers">
+          <div class="col-lg-8">
+            <pre class="line-numbers">
                     <code class="language-javascript dark">
-                      //Get the string from the page
-
-                      //Controller function
-                      function getValues(){
-                      
-                          document.getElementById("alert").classList.add("invisible");
-                          let userString = document.getElementById("userString").value;
-                          let revString = reverseString(userString);
-                          displayString(revString);
-                      }
-                      
-                      
-                      //Reverse the string
-                      //Logic functions
-                      function reverseString(uString){
-                          let revString = [];
-                          
-                          for(let index = uString.length-1; index>-1; index--){
-                              revString+=uString[index]
-                          }
-                          return revString
-                      }
-                      
-                      
-                      //Display the reversed string
-                      //View functions
-                      function displayString(revString){
-                          //Write to the page
-                          document.getElementById("msg").innerHTML = `Your string reversed is: ${revString}` 
-                          //Show the alert box
-                          document.getElementById("alert").classList.remove("invisible");
-                      
-                      }
+                      const Morse_Code = {
+                        'a': '.-',    'b': '-...',  'c': '-.-.', 'd': '-..',
+                        'e': '.',     'f': '..-.',  'g': '--.',  'h': '....',
+                        'i': '..',    'j': '.---',  'k': '-.-',  'l': '.-..',
+                        'm': '--',    'n': '-.',    'o': '---',  'p': '.--.',
+                        'q': '--.-',  'r': '.-.',   's': '...',  't': '-',
+                        'u': '..-',   'v': '...-',  'w': '.--',  'x': '-..-',
+                        'y': '-.--',  'z': '--..',  ' ': '/',
+                        '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
+                        '5': '.....', '6': '-....', '7': '--...', '8': '---..', 
+                        '9': '----.', '0': '-----', 
+                    }
+                    
+                    const To_Letter = {
+                       ".-": "a", "-...":"b", "-.-.": "c", "-..": "d", ".":"e", 
+                       "..-.":"f", "--.":"g", "....":"h", "..":"i", ".---":"j", 
+                       "-.-":"k", ".-..":"l", "--":"m", "-.":"n", "---":"o", 
+                       ".--.":"p", "--.-":"q", ".-.":"r", "...":"s", "-":"t", 
+                       "..-":"u", "...-":"v", ".--":"w", "-..-":"x", "-.--":"y", 
+                       "--..":"z", ".----":"1", "..---":"2", "...--":"3", "....-":"4", 
+                       ".....":"5", "-....":"6", "--...":"7", "---..":"8", "----.":"9", 
+                       "-----":"0", "/":" "
+                    }
+                    
+                    //Get the letters string from the input 
+                    //Controller function
+                    function getValues(){
+                        document.getElementById("alert").classList.add("invisible");
+                        let userString = document.getElementById("userString").value;
+                        if (document.getElementById("inputReverse").checked) {
+                            userString = reverseString(userString)
+                        }
+                        let moreCode = toMorse(userString);
+                        displayString(moreCode);
+                    }
+                    
+                    //Get the morse code from the input
+                    function getMorse(){
+                        document.getElementById("alertOutput").classList.add("invisible");
+                        let codedStr = document.getElementById("codedString").value;
+                        let msg = toLetters(codedStr)
+                        if (document.getElementById("decodeReverse").checked){
+                            msg = reverseString(msg)
+                        }
+                        displayDecode(msg)
+                    }
+                    
+                    //Translate morse codes to texts
+                    function toLetters(code){
+                        let words = code.split('/')
+                        let letters = words.map((w) => w.split(' '));
+                        let decoded = []
+                    
+                        for(let i = 0; i < letters.length; i++){
+                            decoded[i] = [];
+                            for(let x = 0; x < letters[i].length; x++){
+                                if(To_Letter[letters[i][x]]){
+                                    decoded[i].push(To_Letter[letters[i][x]] );
+                                } else {
+                                    decoded[i].push(letters[i][x]);
+                                }
+                            }
+                        }
+                        return decoded.map(arr => arr.join('')).join(' ');
+                    }
+                    
+                    //Translate texts to morse codes
+                    function toMorse(str){
+                        
+                        return str.toLowerCase().split('')
+                        .map(function(e){     // Replace each character with a morse "letter"
+                            return Morse_Code[e.toLowerCase()] || e.toLowerCase(); // Lowercase only, ignore unknown characters.
+                        })
+                        .join(' ')            // Convert the array back to a string.
+                        .replace(/ +/g, ' ');
+                        
+                    }
+                    
+                    
+                    //Reverse the string
+                    function reverseString(uString){
+                        let revString = [];
+                        
+                        for(let index = uString.length-1; index>-1; index--){
+                            revString+=uString[index]
+                        }
+                        return revString
+                    }
+                    
+                    
+                    //Display the reversed string
+                    //View functions
+                    function displayString(codedStr){
+                        //Write to the page
+                        document.getElementById("msg").innerHTML = `${codedStr}` 
+                        //Show the alert box
+                        document.getElementById("alert").classList.remove("invisible");
+                    
+                    }
+                    
+                    //Display the output decoded message
+                    function displayDecode(msg) {
+                        //Write to the page
+                        document.getElementById("msgOuput").innerHTML = `${msg}` 
+                        //Show the alert box
+                        document.getElementById("alertOutput").classList.remove("invisible");
+                    
+                    }
                     </code>
                 </pre>
-            </div>
-            <div class="col-lg-4">
-                <p>The code is structure in one fucntion</p>
-                <h5>Hello World</h5>
-                <p>Hello World is a function that displays an alert with a message of Hello World</p>
+          </div>
+          <div class="col-lg-4">
+            <h5>getValues() && getMorse()</h5>
+            <p>
+              getValues() acts as the controller of feature of translating text
+              to morse code. It get the user input then if the reversed box is
+              checked, it would call reverseString to reverse the input string.
+              Then it would call moreCode to translate it into morse code.
+              Finally, it calls displayString to display it properly. <br />
+              getMorse() acts very similarly to getValues() as it's translating
+              morse code to text.
+            </p>
+            <hr />
 
-            </div>
+            <h5>toLetters(code) && toMorse(str)</h5>
+            <p>
+              toMorse(str) breaks the text into individual letter and then do a
+              mapping from letter to it's respective morse code. If it doesn't
+              recognize the letter, it would keep it as it is in the output. The
+              last line uses regex to reduce any double or mutiple spaces to a
+              single space. <br />
+
+              toLetters(code) is a little more complicated. First it would split
+              the morse code into words by '/'. Now it would further
+              deconstructed into letters and through mapping we get the
+              corresponding letter. Finally we join all of the words together
+              separated by a single space.
+            </p>
+            <h5>reverseString(str)</h5>
+            <p>
+              Given a string, it would return the reversed string.
+            </p>
+          </div>
         </div>
       </div>
     </main>
@@ -174,13 +286,12 @@
 
     <script src="js/prism.js"></script>
     <script>
-        Prism.plugins.NormalizeWhitespace.setDefaults({
-            'remove-trailing': true,
-            'remove-indent': true,
-            'left-trim': true,
-            'right-trim': true
-        })
+      Prism.plugins.NormalizeWhitespace.setDefaults({
+        "remove-trailing": true,
+        "remove-indent": true,
+        "left-trim": true,
+        "right-trim": true,
+      });
     </script>
-
   </body>
 </html>

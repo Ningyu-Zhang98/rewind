@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>App Name: A coding Project By John Zhang</title>
+    <title>Enigma: A coding Project By John Zhang</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -52,21 +52,21 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link"  href="index.html"
-                >Home</a
-              >
+              <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="app.html">The App</a>
+              <a class="nav-link active" aria-current="page" href="app.html"
+                >The App</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="code.html">The Code</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="#">Git Repo</a>
+              <a class="nav-link" target="_blank" href="https://github.com/Ningyu-Zhang98/rewind">Git Repo</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="#">About</a>
+              <a class="nav-link" target="_blank" href="https://johnzhang-portforlio.netlify.app/">About</a>
             </li>
           </ul>
         </div>
@@ -75,32 +75,104 @@
     <main class="flex-shrink-0">
       <div class="container mt-5">
         <div class="row row-cols-1 row-cols-md-2">
-          <div class="col">
+          <div class="col border-end border-2">
             <h1 class="display-5 fw-bold 1h-1 mb-3">
-              Rewind: A coding project
+              Enigma: A coding project
             </h1>
             <h4 class="lead pb-3">
-              There and back again. A javascript coding exercise using arrays. Write a program that displays a string in reverse.
+              Enter a string, engimatize it by translating the given text to
+              morse code. You can even to reverse the morse code to make it even
+              more hard to decode!
+            </h4>
+            <hr />
+            <h4 class="lead pb-3">
+              Or you can enter a morse code and let the app to decode it for
+              you! In case the morse code is also reversed, you could also
+              reverse it back by checking the reversed box!
             </h4>
           </div>
           <div class="col">
             <h5 class="border-1 border-bottom border-danger">
-              Enter a string to be reversed
+              Enter a string to be enigmatized
             </h5>
             <form class="row gx-3 gy-2">
               <div class="col">
-                <input type="text" id="userString" class="form-control" placeholder="Enter a string" aria-label="Enter a string">
+                <input
+                  type="text"
+                  id="userString"
+                  class="form-control"
+                  placeholder="Enter a string"
+                  aria-label="Enter a string"
+                />
               </div>
+
               <div class="col-12 d-flex justify-content-end">
-                <button type="button" id="btnSubmit" class="btn btn-danger">Reverse Me</button>
+                <div class="form-group form-check px-2">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="inputReverse"
+                  />
+                  <label class="form-check-label" for="inputReverse"
+                    >Reversed</label
+                  >
+                </div>
+                <button type="button" id="btnSubmit" class="btn btn-danger">
+                  Enigmatize
+                </button>
               </div>
-              <div class="alert alert-danger mt-5 invisible fade show" id="alert" role="alert">
-                <h4 class="alert-heading">Well Done</h4>
-                <hr>
+              <div
+                class="alert alert-danger mt-5 invisible fade show"
+                id="alert"
+                role="alert"
+              >
+                <h4 class="alert-heading">Your coded message is:</h4>
+                <hr />
                 <p class="mb-0" id="msg">
                   <!-- insert this message -->
                 </p>
+              </div>
+            </form>
+            <hr />
+            <h5 class="border-1 border-bottom border-danger">
+              Enter a string to be decoded
+            </h5>
+            <form class="row gx-3 gy-2">
+              <div class="col">
+                <input
+                  type="text"
+                  id="codedString"
+                  class="form-control"
+                  placeholder="Enter a string"
+                  aria-label="Enter a string"
+                />
+              </div>
 
+              <div class="col-12 d-flex justify-content-end">
+                <div class="form-group form-check px-2">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="decodeReverse"
+                  />
+                  <label class="form-check-label" for="decodeReverse"
+                    >Reversed</label
+                  >
+                </div>
+                <button type="button" id="btnDecode" class="btn btn-danger">
+                  Decode
+                </button>
+              </div>
+              <div
+                class="alert alert-danger mt-5 invisible fade show"
+                id="alertOutput"
+                role="alert"
+              >
+                <h4 class="alert-heading">Your decoded message is:</h4>
+                <hr />
+                <p class="mb-0" id="msgOuput">
+                  <!-- insert this message -->
+                </p>
               </div>
             </form>
           </div>
@@ -156,6 +228,7 @@
     <script src="js/site.js"></script>
     <script>
       document.getElementById("btnSubmit").addEventListener("click", getValues);
+      document.getElementById("btnDecode").addEventListener("click", getMorse);
     </script>
   </body>
 </html>
